@@ -1,1 +1,10 @@
+/*.pdf
+/*.csv
+/*.json
 db.sqlite3
+/*.idea
+/*.zip
+/*.tar.gz
+env/
+.idea/
+.vscode/
