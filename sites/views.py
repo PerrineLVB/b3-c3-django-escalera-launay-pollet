@@ -14,6 +14,7 @@ def site_details(request, pk):
     return render(request, 'site_details.html', context)
 
 def create_site(request):
+
     if request.method == 'POST':
         try:
             name = request.POST.get('name')
