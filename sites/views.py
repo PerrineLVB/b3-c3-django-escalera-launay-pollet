@@ -4,11 +4,21 @@ from django.http import HttpResponse
 from sites.forms import SiteForm
 # Create your views here.
 from sites.models import Site
+from django.contrib import messages
 
 
 def index(request):
     sites = Site.objects.all()
     context = {'sites': sites}
+    #clean messages in session
+    storage = messages.get_messages(request)
+
+    # Faire quelque chose avec chaque message
+    for message in storage:
+       pass
+
+    # Marquer les messages comme utilisés
+    storage.used = True
     return render(request, 'index.html', context)
 
 
@@ -23,6 +33,9 @@ def create_site(request):
         form = SiteForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Votre site a été ajouté avec succès')
+        else:
+            messages.error(request, 'Un problème est survenu lors de l\'ajout de votre site')
         return redirect('/sites')
             # return HttpResponse('Votre site a été ajouté avec succès')
     # if request.method == 'GET', form is empty
@@ -41,6 +54,9 @@ def update_site(request, pk):
         form = SiteForm(request.POST, instance=site)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Votre site a été ajouté avec succès')
+        else:
+            messages.error(request, 'Un problème est survenu lors de l\'ajout de votre site')
         return redirect('/sites')
 
     else:

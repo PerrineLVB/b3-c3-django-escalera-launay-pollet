@@ -1,6 +1,11 @@
 {% extends 'base.html' %}
 {% block content %}
 <h1>Sites</h1>
+    {% if messages %}
+    {% for message in messages %}
+      <p>{{ message }}</p>
+    {% endfor %}
+  {% endif %}
 <ul>
     {% for site in sites  %}
         <li>{{ site.name }} - {{ site.url }} <a href="{% url 'update_site' pk=site.pk %}">Update infos</a></li>
