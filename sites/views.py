@@ -35,16 +35,17 @@ def create_site(request):
 
 
 def update_site(request, pk):
+    site = Site.objects.filter(pk=pk).first()
+
     if request.method == 'POST':
-        form = SiteForm(request.POST)
+        form = SiteForm(request.POST, instance=site)
         if form.is_valid():
             form.save()
         return redirect('/sites')
-        # return HttpResponse('Votre site a été ajouté avec succès')
-    # if request.method == 'GET', form is empty
+
     else:
-        site = Site.objects.get(id=pk)
-        form = SiteForm()
+        form = SiteForm(instance=site)
+            # return HttpResponse('Votre site a été modifié avec succès')
 
     return render(request,
                   'update_site.html',
