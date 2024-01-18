@@ -1,3 +1,5 @@
+import csv
+
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 
@@ -74,3 +76,15 @@ def delete_site(request, pk):
         site.delete()
         return HttpResponse('Site deleted successfully')
     return HttpResponse('bad request')
+
+def export_csv(request):
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="sites.csv"'
+
+    writer = csv.writer(response)
+    writer.writerow(['name', 'username', 'site_url', 'password'])
+    sites = Site.objects.all()
+    for site in sites:
+        writer.writerow([site.name, site.username, site.site_url, site.password])
+
+    return response
