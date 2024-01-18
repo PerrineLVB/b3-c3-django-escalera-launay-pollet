@@ -1,4 +1,6 @@
 {% extends 'base.html' %}
+{% load static %}
+
 {% block content %}
 <h1>Sites</h1>
     {% if messages %}
@@ -11,4 +13,8 @@
         <li class="list-group-item">{{ site.name }} - {{ site.url }} <a href="{% url 'update_site' pk=site.pk %}">Update infos</a></li>
     {% endfor %}
 </ul>
+{% endblock %}
+{% block script %}
+  <!-- Inclure le script externe -->
+  <script src="{% static 'js/script.js' %}"></script>
 {% endblock %}
