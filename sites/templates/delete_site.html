@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Suppression de mon site</h1>
+
+<p>Êtes-vous sûr(e) de vouloir supprimer le site : {{ site.name }} ?</p>
+
+  <form action="" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Supprimer">
+ </form>
+
+{% endblock %}
