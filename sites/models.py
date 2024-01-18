@@ -1,6 +1,6 @@
 from django.db import models
 # Create your models here.
-class Sites(models.Model):
+class Site(models.Model):
     name = models.CharField(max_length=255)
     username = models.CharField(max_length=255)
     site_url = models.URLField(blank=True)
