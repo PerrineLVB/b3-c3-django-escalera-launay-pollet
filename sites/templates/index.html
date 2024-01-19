@@ -9,9 +9,9 @@
 <ul class="list-group">
     {% for site in sites  %}
                 <li class="list-group-item">{{ site.name }} - {{ site.url }}
-                    <a href="{% url 'update_site' pk=site.pk %}">Update infos</a>
+                    <a href="{% url 'update_site' pk=site.pk %}">Editer</a>
                 <span> - </span>
-                    <a href="{% url 'delete_site' pk=site.pk %}">Delete</a>
+                    <a href="{% url 'delete_site' pk=site.pk %}">Supprimer</a>
                 </li>
     {% endfor %}
 </ul>

@@ -69,7 +69,10 @@ def update_site(request, pk):
 
 
 def delete_site(request, pk):
-    site = Site.objects.filter(pk=pk).first()
-    if site is not None:
-        return render(request, 'delete_site.html', {'site': site})
-    return HttpResponse('bad request')
+    site = Site.objects.get(pk=pk)
+    if request.method == 'POST':
+        site.delete()
+        messages.success(request, 'Votre site "' + site.name + '" a été supprimé avec succès.')
+        return redirect('/sites')
+
+    return render(request, 'delete_site.html',{'site': site})
