@@ -11,4 +11,5 @@
         <li class="list-group-item">{{ site.name }} - {{ site.url }} <a href="{% url 'update_site' pk=site.pk %}">Update infos</a></li>
     {% endfor %}
 </ul>
+    <button onclick="location.href='{%  url 'export_csv' %}'" type="button">Export CSV</button>
 {% endblock %}
