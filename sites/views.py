@@ -1,3 +1,5 @@
+import csv, io
+
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 
@@ -74,3 +76,31 @@ def delete_site(request, pk):
         site.delete()
         return HttpResponse('Site deleted successfully')
     return HttpResponse('bad request')
+
+def export_csv(request):
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="sites.csv"'
+
+    writer = csv.writer(response)
+    writer.writerow(['name', 'username', 'site_url', 'password'])
+    sites = Site.objects.all()
+    for site in sites:
+        writer.writerow([site.name, site.username, site.site_url, site.password])
+
+    return response
+
+def import_csv(request):
+    if request.method == 'POST':
+        csv_file = request.FILES['csv_file']
+        decoded_file = csv_file.read().decode('utf-8')
+        io_string = io.StringIO(decoded_file)
+        next(io_string)
+        for row in csv.reader(io_string, delimiter=',', quotechar='|'):
+            _, created = Site.objects.update_or_create(
+                name=row[0],
+                username=row[1],
+                site_url=row[2],
+                password=row[3]
+            )
+        return redirect('/sites')
+    return render(request, 'import_csv.html')
