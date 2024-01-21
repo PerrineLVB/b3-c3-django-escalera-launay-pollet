@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   navLinks.forEach(function (link) {
     if (link.href === currentUrl) {
+      console.log(currentUrl)
       link.classList.add('active');
     }
   });
