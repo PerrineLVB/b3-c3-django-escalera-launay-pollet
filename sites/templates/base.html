@@ -22,15 +22,15 @@
           <a class="nav-link active" aria-current="page" href="/">Accueil</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/create_site">Ajouter un site</a>
+          <a class="nav-link" href="{% url 'create_site' %}">Ajouter un site</a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             CSV
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <li><a class="dropdown-item" href="/import_csv">importer à partir d'un fichier csv</a></li>
-            <li><a class="dropdown-item" href="/export_csv">exporter mes mots de passe en csv</a></li>
+            <li><a class="dropdown-item" href="#">importer à partir d'un fichier csv</a></li>
+            <li><a class="dropdown-item" href="#">exporter mes mots de passe en csv</a></li>
           </ul>
         </li>
       </ul>
