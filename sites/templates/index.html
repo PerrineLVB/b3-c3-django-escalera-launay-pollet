@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+{% if user.is_authenticated %}
 <h1>Sites</h1>
     {% if messages %}
     {% for message in messages %}
@@ -13,4 +14,8 @@
     {% endfor %}
 </ul>
     <button onclick="location.href='{%  url 'export_csv' %}'" type="button">Export CSV</button>
+{% else %}
+    <p>You are not logged in</p>
+    <a href="{% url 'login' %}">Click here to login</a>
+{% endif %}
 {% endblock %}
