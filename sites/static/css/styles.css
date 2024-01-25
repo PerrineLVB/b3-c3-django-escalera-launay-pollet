@@ -1,18 +1,11 @@
 :root {
     --my_primary: #264b5d;
 }
+
 .bg-primary {
     background-color: var(--my_primary) !important;
 }
 
-/*body {*/
-/*    background-color: var(--my_primary);*/
-/*    color: #fff;*/
-/*    font-family: 'Roboto', sans-serif;*/
-/*    font-size: 1.2rem;*/
-/*    line-height: 1.5;*/
-/*    margin: 0;*/
-/*}*/
 
 .btn-outline-primary {
     --bs-btn-color: var(--my_primary);

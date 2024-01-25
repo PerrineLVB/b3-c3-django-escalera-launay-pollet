@@ -1,11 +1,10 @@
-document.addEventListener('DOMContentLoaded', function () {
-  const currentUrl = window.location.href;
-  const navLinks = document.querySelectorAll('.navbar-nav a.nav-link');
+document.addEventListener('DOMContentLoaded', function() {
+        var currentPage = window.location.pathname;
+        var navLinks = document.querySelectorAll('.navbar-nav a');
 
-  navLinks.forEach(function (link) {
-    if (link.href === currentUrl) {
-      console.log(currentUrl)
-      link.classList.add('active');
-    }
-  });
-});
+        navLinks.forEach(function(link) {
+            if (link.getAttribute('href') === currentPage) {
+                link.classList.add('active');
+            }
+        });
+    });
