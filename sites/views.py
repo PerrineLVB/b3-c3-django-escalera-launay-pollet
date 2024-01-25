@@ -10,12 +10,24 @@ from django.contrib import messages
 
 
 def index(request):
+    from datetime import datetime, timedelta
+
+    # Récupérer la date du 1er juin de cette année
+    premier_juin = datetime.now().replace(month=6, day=1)
+
+    # Calculer le nombre de jours à ajouter pour atteindre le premier lundi
+    jours_avant_lundi = (7 - premier_juin.weekday()) % 7
+
+    # Ajouter les jours nécessaires pour atteindre le premier lundi
+    premier_lundi_juin = premier_juin + timedelta(days=jours_avant_lundi)
+
+    # Afficher le résultat
+    print(f"Le premier lundi du mois de juin est le {premier_lundi_juin.strftime('%Y-%m-%d')}.")
     sites = Site.objects.all()
     context = {'sites': sites}
     #clean messages in session
     storage = messages.get_messages(request)
 
-    # Faire quelque chose avec chaque message
     for message in storage:
        pass
 
