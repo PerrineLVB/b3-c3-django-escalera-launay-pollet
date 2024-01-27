@@ -1,9 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Sites</h1>
-
-    <a href="{% url 'create_site' %}">Ajouter</a>
+<h1>Mes mots de passe</h1>
     {% if messages %}
     {% for message in messages %}
       <p>{{ message }}</p>

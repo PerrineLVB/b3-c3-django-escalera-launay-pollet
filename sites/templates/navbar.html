@@ -23,8 +23,13 @@
           </ul>
         </li>
       </ul>
-                <div class="ms-auto">
-        <button class="btn btn-outline-primary">Se connecter</button>
+        <div class="ms-auto">
+            {% if user.is_authenticated %}
+                <span class="navbar-txt">{{ user.get_username }}</span>
+                <a class="btn btn-outline-primary" href="{% url 'logout' %}?next={{ request.path }}" role="button">Se déconnecter</a>
+            {% else %}
+                <a class="btn btn-outline-primary" href="{% url 'login' %}?next={{ request.path }}" role="button">Se connecter</a>
+            {% endif %}
       </div>
     </div>
         </div>
