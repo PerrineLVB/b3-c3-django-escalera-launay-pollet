@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+
 {% block content %}
 <h1>Sites</h1>
 
@@ -17,4 +18,5 @@
                 </li>
     {% endfor %}
 </ul>
+    <button onclick="location.href='{%  url 'export_csv' %}'" type="button">Export CSV</button>
 {% endblock %}

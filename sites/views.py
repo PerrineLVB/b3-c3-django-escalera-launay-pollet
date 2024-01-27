@@ -1,3 +1,5 @@
+import csv, io
+
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 
@@ -8,12 +10,24 @@ from django.contrib import messages
 
 
 def index(request):
+    from datetime import datetime, timedelta
+
+    # Récupérer la date du 1er juin de cette année
+    premier_juin = datetime.now().replace(month=6, day=1)
+
+    # Calculer le nombre de jours à ajouter pour atteindre le premier lundi
+    jours_avant_lundi = (7 - premier_juin.weekday()) % 7
+
+    # Ajouter les jours nécessaires pour atteindre le premier lundi
+    premier_lundi_juin = premier_juin + timedelta(days=jours_avant_lundi)
+
+    # Afficher le résultat
+    print(f"Le premier lundi du mois de juin est le {premier_lundi_juin.strftime('%Y-%m-%d')}.")
     sites = Site.objects.all()
     context = {'sites': sites}
     #clean messages in session
     storage = messages.get_messages(request)
 
-    # Faire quelque chose avec chaque message
     for message in storage:
        pass
 
@@ -76,3 +90,32 @@ def delete_site(request, pk):
         return redirect('/sites')
 
     return render(request, 'delete_site.html',{'site': site})
+
+def export_csv(request):
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="sites.csv"'
+
+    writer = csv.writer(response)
+    writer.writerow(['name', 'username', 'site_url', 'password'])
+    sites = Site.objects.all()
+    for site in sites:
+        writer.writerow([site.name, site.username, site.site_url, site.password])
+
+    return response
+
+def import_csv(request):
+    if request.method == 'POST':
+        csv_file = request.FILES['csv_file']
+        decoded_file = csv_file.read().decode('utf-8')
+        io_string = io.StringIO(decoded_file)
+        next(io_string)
+        for row in csv.reader(io_string, delimiter=',', quotechar='|'):
+            _, created = Site.objects.update_or_create(
+                name=row[0],
+                username=row[1],
+                site_url=row[2],
+                password=row[3]
+            )
+        return redirect('/sites')
+    return render(request, 'import_csv.html')
+
