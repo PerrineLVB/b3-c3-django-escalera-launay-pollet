@@ -76,11 +76,13 @@ def update_site(request, pk):
 
 @login_required
 def delete_site(request, pk):
-    site = Site.objects.filter(pk=pk).first()
-    if site is not None:
+    site = Site.objects.get(pk=pk)
+    if request.method == 'POST':
         site.delete()
-        return HttpResponse('Site deleted successfully')
-    return HttpResponse('bad request')
+        messages.success(request, 'Votre site "' + site.name + '" a été supprimé avec succès.')
+        return redirect('/sites')
+
+    return render(request, 'delete_site.html',{'site': site})
 
 
 def export_csv(request):
@@ -111,3 +113,4 @@ def import_csv(request):
             )
         return redirect('/sites')
     return render(request, 'import_csv.html')
+
