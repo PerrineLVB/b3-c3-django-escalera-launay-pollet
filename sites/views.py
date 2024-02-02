@@ -38,7 +38,7 @@ def create_site(request):
         form = SiteForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Votre site a été ajouté avec succès')
+            messages.success(request, 'Votre site a été ajouté avec succès !')
         else:
             messages.error(request, 'Un problème est survenu lors de l\'ajout de votre site')
         return redirect('/sites')
@@ -60,7 +60,7 @@ def update_site(request, pk):
         form = SiteForm(request.POST, instance=site)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Votre site a été ajouté avec succès')
+            messages.success(request, 'Votre site a été ajouté avec succès !')
         else:
             messages.error(request, 'Un problème est survenu lors de l\'ajout de votre site')
         return redirect('/sites')

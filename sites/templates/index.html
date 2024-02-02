@@ -7,13 +7,32 @@
       <p>{{ message }}</p>
     {% endfor %}
   {% endif %}
-<ul class="list-group">
-    {% for site in sites  %}
-      <li class="list-group-item list-group-item-action">{{ site.name }} - {{ site.url }}
-          <a href="{% url 'update_site' pk=site.pk %}">Editer</a>
-      <span> - </span>
-          <a href="{% url 'delete_site' pk=site.pk %}">Supprimer</a>
-      </li>
-    {% endfor %}
-</ul>
+<div class="container">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>URL</th>
+                <th>Utilisateur</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for site in sites  %}
+                <tr>
+                    <td>{{ site.name }}</td>
+                    <td>{{ site.site_url }}</td>
+                    <td>{{ site.username }}</td>
+                    <td>
+                        <div class="btn-group" role="group" aria-label="Actions">
+                            <a href="" class="btn rounded-pill btn-success mx-2"><i class="fa-regular fa-eye"></i></a>
+                            <a href="{% url 'update_site' pk=site.pk %}" class="btn rounded-pill btn-primary mx-2"><i class="fa-regular fa-pen-to-square"></i></a>
+                            <a href="{% url 'delete_site' pk=site.pk %}" class="btn rounded-pill btn-danger mx-2"><i class="fa-regular fa-trash-can"></i></a>
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 {% endblock %}
