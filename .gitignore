@@ -8,3 +8,14 @@ db.sqlite3
 env/
 .idea/
 .vscode/
+### Django ###
+*.log
+*.pot
+*.pyc
+__pycache__/
+local_settings.py
+
+### Python ###
+# Byte-compiled / optimized / DLL files
+*__pycache__/
+*.py[cod]
