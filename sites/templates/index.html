@@ -9,11 +9,11 @@
   {% endif %}
 <ul class="list-group">
     {% for site in sites  %}
-                <li class="list-group-item">{{ site.name }} - {{ site.url }}
-                    <a href="{% url 'update_site' pk=site.pk %}">Editer</a>
-                <span> - </span>
-                    <a href="{% url 'delete_site' pk=site.pk %}">Supprimer</a>
-                </li>
+      <li class="list-group-item list-group-item-action">{{ site.name }} - {{ site.url }}
+          <a href="{% url 'update_site' pk=site.pk %}">Editer</a>
+      <span> - </span>
+          <a href="{% url 'delete_site' pk=site.pk %}">Supprimer</a>
+      </li>
     {% endfor %}
 </ul>
     <button onclick="location.href='{%  url 'export_csv' %}'" type="button">Export CSV</button>

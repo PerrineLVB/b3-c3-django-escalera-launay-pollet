@@ -13,7 +13,9 @@
     <body>
     {% include 'navbar.html' %}
     <div class=" container-fluid">
-        {% block content %}{% endblock %}
+        <div class="w-50 p-3 position-absolute top-50 start-50 translate-middle">
+             {% block content %}{% endblock %}
+        </div>
     </div>
     </body>
 </html>
