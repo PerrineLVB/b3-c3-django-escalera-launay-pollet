@@ -4,9 +4,9 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 
-from sites.forms import SiteForm
+from .forms import SiteForm
 # Create your views here.
-from sites.models import Site
+from .models import Site
 from django.contrib import messages
 
 
@@ -113,4 +113,3 @@ def import_csv(request):
             )
         return redirect('/sites')
     return render(request, 'import_csv.html')
-

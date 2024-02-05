@@ -11,4 +11,4 @@ class Site(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('site_details', args=[str(self.id)])
+        return reverse('update_site', args=[str(self.pk)])
