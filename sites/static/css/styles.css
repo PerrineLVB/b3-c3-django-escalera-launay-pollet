@@ -22,3 +22,18 @@
     --bs-btn-disabled-bg: transparent;
     --bs-btn-disabled-border-color: var(--my_primary);
     --bs-gradient: none;}
+
+
+.input-group-text {
+  border: 1px solid #264b5d;
+    width:100%;
+}
+
+.input-group-text::after {
+    content: "Browse";
+    height: 100%;
+}
+
+.label-csv {
+    opacity: 0;
+}
