@@ -1,20 +1,21 @@
 
 {% extends "base.html" %}
-
+<div class="card p-4">
 {% block content %}
 
   {% if form.errors %}
-    <p>Mot de passe ou login inconnu</p>
+    <h4 class="card_header">Mot de passe ou login inconnu</h4>
   {% endif %}
 
   {% if next %}
     {% if user.is_authenticated %}
-      <p>Vous n'avez pas l'autorisation d'accéder au site</p>
+      <h4 class="card_header">Vous n'avez pas l'autorisation d'accéder au site</h4>
     {% else %}
-      <p>Veuillez vous connecter pour accéder au site</p>
+      <h4 class="card_header">Veuillez vous connecter pour accéder au site</h4>
     {% endif %}
   {% endif %}
-
+  <div class="card-body">
+        <p class="card-text">
   <form method="post" action="{% url 'login' %}">
     {% csrf_token %}
     <table>
@@ -27,10 +28,12 @@
         <td>{{ form.password }}</td>
       </tr>
     </table>
-    <input type="submit" value="login">
+    <button type="submit" class="btn btn-outline-primary">login</button>
     <input type="hidden" name="next" value="{{ next }}">
   </form>
 <!--todo : add feature-->
 <!--  <p><a href="{% url 'password_reset' %}">Mot de passe perdu ?</a></p>-->
-
+    </p>
+    </div>
+</div>
 {% endblock %}

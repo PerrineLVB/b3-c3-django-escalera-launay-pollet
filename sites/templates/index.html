@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Mes mots de passe</h1>
+<h4>Mes mots de passe</h4>
     {% if messages %}
     {% for message in messages %}
       <p>{{ message }}</p>
@@ -9,11 +9,16 @@
   {% endif %}
 <ul class="list-group">
     {% for site in sites  %}
-      <li class="list-group-item list-group-item-action">{{ site.name }} - {{ site.url }}
-          <a href="{% url 'update_site' pk=site.pk %}">Editer</a>
-      <span> - </span>
-          <a href="{% url 'delete_site' pk=site.pk %}">Supprimer</a>
-      </li>
+      <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+  <div>
+    {{ site.name }} - <small>{{ site.site_url | truncatechars:40}}</small>
+  </div>
+  <div>
+    <a href="{% url 'update_site' pk=site.pk %}" class="me-2 text-primary"><i class="bi bi-pencil-square text-primary"></i></a>
+    <a href="{% url 'delete_site' pk=site.pk %}" class="ms-2 text-primary"><i class="bi bi-trash3 text-primary"></i></a>
+  </div>
+</li>
     {% endfor %}
 </ul>
+</div>
 {% endblock %}

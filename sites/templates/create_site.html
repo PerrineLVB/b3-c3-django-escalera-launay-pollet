@@ -11,14 +11,20 @@
 
 
 {% block content %}
-<h1>Ajouter un site</h1>
-<form action="" method="post" >
-{% csrf_token %}
-{% bootstrap_form form %}
-{% buttons %}
-    <button type="submit" class="btn btn-outline-primary">
-      Enregistrer
-    </button>
-  {% endbuttons %}
-</form>
+<div class="card p-4">
+    <h4 class="card_header">Ajouter un site</h4>
+    <div class="card-body">
+        <p class="card-text">
+          <form action="" method="post">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            {% buttons %}
+                <button type="submit" class="btn btn-outline-primary">
+                    Enregistrer
+                </button>
+            {% endbuttons %}
+            </form>
+        </p>
+    </div>
+</div>
 {% endblock %}
