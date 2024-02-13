@@ -9,6 +9,8 @@ from sites.forms import SiteForm
 from sites.models import Site
 from django.contrib import messages
 
+from sites.utils import detect_delimiter
+
 
 @login_required
 def index(request):
@@ -104,7 +106,8 @@ def import_csv(request):
         decoded_file = csv_file.read().decode('utf-8')
         io_string = io.StringIO(decoded_file)
         next(io_string)
-        for row in csv.reader(io_string, delimiter=',', quotechar='|'):
+        detected_delimiter = detect_delimiter(decoded_file)
+        for row in csv.reader(io_string, delimiter=detected_delimiter, quotechar='|'):
             _, created = Site.objects.update_or_create(
                 name=row[0],
                 username=row[1],
