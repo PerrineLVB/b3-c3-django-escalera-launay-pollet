@@ -23,10 +23,10 @@
           </ul>
         </li>
       </ul>
-        <button id="darkModeToggle">Dark Mode</button>
-        <div class="ms-auto">
+      <div class="ms-auto">
+          <button id="darkModeToggle" class="btn btn-secondary mx-3">Dark Mode</button>
             {% if user.is_authenticated %}
-                <span class="navbar-txt">{{ user.get_username }}</span>
+                <span class="navbar-txt mx-3">Bonjour, {{ user.get_username }}</span>
                 <a class="btn btn-outline-primary" href="{% url 'logout' %}?next={{ request.path }}" role="button">Se déconnecter</a>
             {% else %}
                 <a class="btn btn-outline-primary" href="{% url 'login' %}?next={{ request.path }}" role="button">Se connecter</a>
