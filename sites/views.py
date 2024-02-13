@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 
-from sites.forms import SiteForm
+from sites.forms import SiteForm, UserRegistrationForm
 # Create your views here.
 from sites.models import Site
 from django.contrib import messages
@@ -117,3 +117,12 @@ def import_csv(request):
         return redirect('/sites')
     return render(request, 'import_csv.html')
 
+def register(request):
+    if request.method == 'POST':
+        form = UserRegistrationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('login')  # Rediriger vers la page de connexion après l'inscription réussie
+    else:
+        form = UserRegistrationForm()
+    return render(request, 'registration/register.html', {'form': form})
