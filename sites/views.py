@@ -12,7 +12,7 @@ from django.contrib import messages
 from sites.utils import detect_delimiter
 
 
-@login_required
+@login_required(redirect_field_name=None)
 def index(request):
     sites = Site.objects.all()
     context = {'sites': sites}
@@ -27,14 +27,14 @@ def index(request):
     return render(request, 'index.html', context)
 
 
-@login_required
+@login_required(redirect_field_name=None)
 def site_details(request, pk):
     site = Site.objects.filter(pk=pk).first()
     context = {'site': site}
     return render(request, 'site_details.html', context)
 
 
-@login_required
+@login_required(redirect_field_name=None)
 def create_site(request):
     if request.method == 'POST':
         form = SiteForm(request.POST)
@@ -54,7 +54,7 @@ def create_site(request):
                   {'form': form})
 
 
-@login_required
+@login_required(redirect_field_name=None)
 def update_site(request, pk):
     site = Site.objects.filter(pk=pk).first()
 
@@ -76,7 +76,7 @@ def update_site(request, pk):
                   {'form': form})
 
 
-@login_required
+@login_required(redirect_field_name=None)
 def delete_site(request, pk):
     site = Site.objects.get(pk=pk)
     if request.method == 'POST':
@@ -116,4 +116,3 @@ def import_csv(request):
             )
         return redirect('/sites')
     return render(request, 'import_csv.html')
-
