@@ -1,5 +1,14 @@
 
 {% extends "base.html" %}
+{# Load the tag library #}
+{% load bootstrap5 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
 
 {% block content %}
 
@@ -10,7 +19,10 @@
  <form method="post">
     {% csrf_token %}
     {% bootstrap_form form %}
-    <button type="submit">S'inscrire</button>
+    <button type="submit" class="btn btn-outline-primary">
+      S'inscrire
+    </button>
+
   </form>
 
 {% endblock %}
