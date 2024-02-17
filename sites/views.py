@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 
-from sites.forms import SiteForm
+from sites.forms import SiteForm, UserRegistrationForm
 # Create your views here.
 from sites.models import Site
 from django.contrib import messages
@@ -84,9 +84,10 @@ def delete_site(request, pk):
         messages.success(request, 'Votre site "' + site.name + '" a été supprimé avec succès.')
         return redirect('/sites')
 
-    return render(request, 'delete_site.html',{'site': site})
+    return render(request, 'delete_site.html', {'site': site})
 
 
+@login_required(redirect_field_name=None)
 def export_csv(request):
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename="sites.csv"'
@@ -100,6 +101,7 @@ def export_csv(request):
     return response
 
 
+@login_required(redirect_field_name=None)
 def import_csv(request):
     if request.method == 'POST':
         csv_file = request.FILES['csv_file']
@@ -116,3 +118,15 @@ def import_csv(request):
             )
         return redirect('/sites')
     return render(request, 'import_csv.html')
+
+
+def register(request):
+    if request.method == 'POST':
+        form = UserRegistrationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Vous êtes inscris, veuillez vous authentifier !')
+            return redirect('login')  # Rediriger vers la page de connexion après l'inscription réussie
+    else:
+        form = UserRegistrationForm()
+    return render(request, 'registration/register.html', {'form': form})

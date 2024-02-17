@@ -9,4 +9,5 @@ urlpatterns = [
     path('site_details/<int:pk>/', views.site_details, name='site_details'),
     path('export_csv/', views.export_csv, name='export_csv'),
     path('import_csv/', views.import_csv, name='import_csv'),
+    path('register/', views.register, name='register'),
 ]
