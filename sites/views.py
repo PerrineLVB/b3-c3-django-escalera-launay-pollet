@@ -84,9 +84,10 @@ def delete_site(request, pk):
         messages.success(request, 'Votre site "' + site.name + '" a été supprimé avec succès.')
         return redirect('/sites')
 
-    return render(request, 'delete_site.html',{'site': site})
+    return render(request, 'delete_site.html', {'site': site})
 
 
+@login_required(redirect_field_name=None)
 def export_csv(request):
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename="sites.csv"'
@@ -100,6 +101,7 @@ def export_csv(request):
     return response
 
 
+@login_required(redirect_field_name=None)
 def import_csv(request):
     if request.method == 'POST':
         csv_file = request.FILES['csv_file']
@@ -116,6 +118,7 @@ def import_csv(request):
             )
         return redirect('/sites')
     return render(request, 'import_csv.html')
+
 
 def register(request):
     if request.method == 'POST':
