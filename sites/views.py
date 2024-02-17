@@ -125,6 +125,7 @@ def register(request):
         form = UserRegistrationForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Vous êtes inscris, veuillez vous authentifier !')
             return redirect('login')  # Rediriger vers la page de connexion après l'inscription réussie
     else:
         form = UserRegistrationForm()
